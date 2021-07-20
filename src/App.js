@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
+import { CAMPSITES } from './shared/campsites';
 import Directory from './components/Directory';
+//We are now importing the {CAMPSITES } data, setting it into the local STATE as 'campsites' and passing it as PROPS to the Directory CHILD COMPONENT
 
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      campsites: CAMPSITES,
+    }
+  }
 
-function App() {
-  return (
+  render() {
+    return (
     <div className="App">
       <Navbar dark color="primary">
         <div className="container">
           <NavbarBrand>Nucamp</NavbarBrand>
         </div>
       </Navbar>
-      <Directory />
+      <Directory campsites={this.state.campsites}/>
     </div>
+    //inside <Directory /> campsites is passed as this.props.campsites
   );
+  }
+  
 }
 
 export default App;
