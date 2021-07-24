@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardImgOverlay, CardBody, CardTitle, CardText } from 'reactstrap';
-
+import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
+import CampsiteInfo from "./CampsiteInfo";
 
 class Directory extends Component {
   constructor(props) {
@@ -8,38 +8,22 @@ class Directory extends Component {
     this.state = {
       //we WERE storing in the STATE of this COMPONENT an ARRAY of OBJECTS('campsites') with PROPERTIES we can reference using the 'this' KEYWORD
       //We have NOW LIFTED THE STATE of 'campsites' to the PARENT COMPONENT
-      selectedCampsite: null
+      selectedCampsite: null,
       //We have now creating a selectedCampsites PROPERTY in the STATE OBJECT. this PROPERTY will be updated in the 'onCampsiteSelect' METHOD below
     };
   }
   onCampsiteSelect(campsite) {
-    this.setState({selectedCampsite: campsite})
+    this.setState({ selectedCampsite: campsite });
     //We are changing the 'selectedCampsites' PROPERTY in the STATE when this METHOD is called by the EVENT handler in the 'render()' METHOD for the {directory COMPONENT} below
     //we are using the setState method to change the STATE. we want to AVOID SETTING THE STATE DIRECTLY OUTSIDE OF THE CONSTRUCTOR
   }
 
-  renderSelectedCampsite(campsite) {
-
-    if (campsite) {
-      return (
-        <Card>
-          <CardImg top src={campsite.image} alt={campsite.name} key={campsite.id}/>
-          <CardBody>
-            <CardTitle>{campsite.name}</CardTitle>
-            <CardText>{campsite.description}</CardText>
-          </CardBody>
-        </Card>
-      );
-    }
-    return <div />;
-  }
-
   render() {
     //we are using the map() function on the 'campsites' ARRAY we have stored in the JSX. in the CALLBACK FUNCTION for the map(), we are telling jS to return a JSX div for each ITERATION within the map ARRAY. In React we should assign the top most element a unique KEY whenever we are rendering an ARRAY
-    const directory = this.props.campsites.map(campsite => {
+    const directory = this.props.campsites.map((campsite) => {
       return (
         <div key={campsite.id} className="col-md-5 m-1">
-          <Card onClick={() =>this.onCampsiteSelect(campsite)}>
+          <Card onClick={() => this.onCampsiteSelect(campsite)}>
             <CardImg src={campsite.image} alt={campsite.name} />
             <CardImgOverlay>
               <CardTitle>{campsite.name}</CardTitle>
@@ -51,14 +35,8 @@ class Directory extends Component {
     //we are going to use the jS VARIABLE {directory} in our JSX RETURN statement below. We write jS VARIABLES inside curly braces {} in JSX
     return (
       <div className="container">
-        <div className="row">
-          {directory}
-        </div>
-        <div className="row">
-          <div className="col-md-5 m-1">
-            {this.renderSelectedCampsite(this.state.selectedCampsite)}
-          </div>
-        </div>
+        <div className="row">{directory}</div>
+        <CampsiteInfo campsite={this.state.selectedCampsite} />
         {/* <ExampleParentComponent /> */}
       </div>
     );
