@@ -1,29 +1,14 @@
 import React, { Component } from "react";
 import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
-import CampsiteInfo from "./CampsiteInfo";
+
 
 class Directory extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //we WERE storing in the STATE of this COMPONENT an ARRAY of OBJECTS('campsites') with PROPERTIES we can reference using the 'this' KEYWORD
-      //We have NOW LIFTED THE STATE of 'campsites' to the PARENT COMPONENT
-      selectedCampsite: null,
-      //We have now creating a selectedCampsites PROPERTY in the STATE OBJECT. this PROPERTY will be updated in the 'onCampsiteSelect' METHOD below
-    };
-  }
-  onCampsiteSelect(campsite) {
-    this.setState({ selectedCampsite: campsite });
-    //We are changing the 'selectedCampsites' PROPERTY in the STATE when this METHOD is called by the EVENT handler in the 'render()' METHOD for the {directory COMPONENT} below
-    //we are using the setState method to change the STATE. we want to AVOID SETTING THE STATE DIRECTLY OUTSIDE OF THE CONSTRUCTOR
-  }
-
   render() {
     //we are using the map() function on the 'campsites' ARRAY we have stored in the JSX. in the CALLBACK FUNCTION for the map(), we are telling jS to return a JSX div for each ITERATION within the map ARRAY. In React we should assign the top most element a unique KEY whenever we are rendering an ARRAY
     const directory = this.props.campsites.map((campsite) => {
       return (
         <div key={campsite.id} className="col-md-5 m-1">
-          <Card onClick={() => this.onCampsiteSelect(campsite)}>
+          <Card onClick={() => this.props.onClick(campsite.id)}>
             <CardImg src={campsite.image} alt={campsite.name} />
             <CardImgOverlay>
               <CardTitle>{campsite.name}</CardTitle>
@@ -36,7 +21,6 @@ class Directory extends Component {
     return (
       <div className="container">
         <div className="row">{directory}</div>
-        <CampsiteInfo campsite={this.state.selectedCampsite} />
         {/* <ExampleParentComponent /> */}
       </div>
     );
