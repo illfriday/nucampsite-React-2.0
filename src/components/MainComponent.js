@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand } from "reactstrap";
+import Header from "./HeaderComponent";
 import { CAMPSITES } from "../shared/campsites";
 import Directory from "./DirectoryComponent";
 import CampsiteInfo from "./CampsiteInfoComponent";
+import Footer from "./FooterComponent";
+// import Contact from "./ContactComponent";
+
 //We are now importing the {CAMPSITES } data, setting it into the local STATE as 'campsites' and passing it as PROPS to the Directory CHILD COMPONENT
 
 class Main extends Component {
@@ -13,20 +16,17 @@ class Main extends Component {
       selectedCampsite: null,
     };
   }
+
   onCampsiteSelect(campsiteId) {
     this.setState({ selectedCampsite: campsiteId });
-    //We are changing the 'selectedCampsites' PROPERTY in the STATE when this METHOD is called by the EVENT handler in the 'render()' METHOD for the {directory COMPONENT} below
+    //We are changing the 'selectedCampsites' PROPERTY in the STATE when this METHOD is called by the EVENT HANDLER in the 'render()' METHOD for the {directory COMPONENT} below
     //we are using the setState method to change the STATE. we want to AVOID SETTING THE STATE DIRECTLY OUTSIDE OF THE CONSTRUCTOR
   }
 
   render() {
     return (
       <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand>Nucamp</NavbarBrand>
-          </div>
-        </Navbar>
+        <Header />
         <Directory
           campsites={this.state.campsites}
           onClick={(campsiteId) => this.onCampsiteSelect(campsiteId)}
@@ -38,6 +38,7 @@ class Main extends Component {
             )[0]
           }
         />
+        <Footer />
       </div>
       //inside <Directory /> campsites is passed as this.props.campsites
     );

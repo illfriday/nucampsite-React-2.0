@@ -16,7 +16,7 @@ class CampsiteInfo extends React.Component {
             key={campsite.id}
           />
           <CardBody>
-            <CardTitle>{campsite.name}</CardTitle>
+            <CardTitle className="card-title">{campsite.name}</CardTitle>
             <CardText>{campsite.description}</CardText>
           </CardBody>
         </Card>

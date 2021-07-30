@@ -11,7 +11,7 @@ class Directory extends Component {
           <Card onClick={() => this.props.onClick(campsite.id)}>
             <CardImg src={campsite.image} alt={campsite.name} />
             <CardImgOverlay>
-              <CardTitle>{campsite.name}</CardTitle>
+              <CardTitle className="card-title">{campsite.name}</CardTitle>
             </CardImgOverlay>
           </Card>
         </div>
