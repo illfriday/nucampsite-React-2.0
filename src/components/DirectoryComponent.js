@@ -1,14 +1,17 @@
 import React from "react";
-import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
+import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem} from "reactstrap";
+import { Link } from 'react-router-dom';
 
-function RenderDirectoryItem({campsite, onClick}) {
+function RenderDirectoryItem({campsite}) {
   return(
-     <Card onClick={() => onClick(campsite.id)}>
-            <CardImg src={campsite.image} alt={campsite.name} />
-            <CardImgOverlay>
-              <CardTitle className="card-title">{campsite.name}</CardTitle>
-            </CardImgOverlay>
-          </Card>
+     <Card >
+      <Link to={`/directory/${campsite.id}`}>
+        <CardImg width="100%" src={campsite.image} alt={campsite.name} />
+        <CardImgOverlay>
+          <CardTitle className="card-title">{campsite.name}</CardTitle>
+        </CardImgOverlay>
+       </Link>
+      </Card>
   );
 }
 //RenderDirectoryItem is a FUNCTIONAL COMPONENT. It is receiving PROPS 'campsite' and 'onClick' from the 'Directory' FUNCTIONAL COMPONENT via OBJECT DESTRUCTURING inside the PARAMETER LIST.
@@ -21,13 +24,27 @@ function Directory(props){
     const directory = props.campsites.map((campsite) => {
       return (
         <div key={campsite.id} className="col-md-5 m-1">
-         <RenderDirectoryItem campsite={campsite} onClick={props.onClick}/>
+         <RenderDirectoryItem campsite={campsite}/>
         </div>
       );
     });
     //we are going to use the jS VARIABLE {directory} in our JSX RETURN statement below. We write jS VARIABLES inside curly braces {} in JSX
     return (
       <div className="container">
+        <div className="row">
+          <div className="column">
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="./home">Home</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>
+                Directory
+              </BreadcrumbItem>
+            </Breadcrumb>
+            <h2>Directory</h2>
+            <hr />
+          </div>
+        </div>
         <div className="row">{directory}</div>
         {/* <ExampleParentComponent /> */}
       </div>
