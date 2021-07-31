@@ -1,19 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
 
-
-class Directory extends Component {
-  render() {
-    //we are using the map() function on the 'campsites' ARRAY we have stored in the JSX. in the CALLBACK FUNCTION for the map(), we are telling jS to return a JSX div for each ITERATION within the map ARRAY. In React we should assign the top most element a unique KEY whenever we are rendering an ARRAY
-    const directory = this.props.campsites.map((campsite) => {
-      return (
-        <div key={campsite.id} className="col-md-5 m-1">
-          <Card onClick={() => this.props.onClick(campsite.id)}>
+function RenderDirectoryItem({campsite, onClick}) {
+  return(
+     <Card onClick={() => onClick(campsite.id)}>
             <CardImg src={campsite.image} alt={campsite.name} />
             <CardImgOverlay>
               <CardTitle className="card-title">{campsite.name}</CardTitle>
             </CardImgOverlay>
           </Card>
+  );
+}
+//RenderDirectoryItem is a FUNCTIONAL COMPONENT. It is receiving PROPS 'campsite' and 'onClick' from the 'Directory' FUNCTIONAL COMPONENT via OBJECT DESTRUCTURING inside the PARAMETER LIST.
+
+
+function Directory(props){
+  //We have updated the 'Directory' to a FUNCTIONAL COMPONENT. In a FUNCTIONAL COMPONENT we no longer use the 'this' KEYWORD when using PROPS('this.props...' becomes 'props...')
+
+    //we are using the map() function on the 'campsites' ARRAY we have stored in the JSX. in the CALLBACK FUNCTION for the map(), we are telling jS to return a JSX div for each ITERATION within the map ARRAY. In React we should assign the top most element a unique KEY whenever we are rendering an ARRAY
+    const directory = props.campsites.map((campsite) => {
+      return (
+        <div key={campsite.id} className="col-md-5 m-1">
+         <RenderDirectoryItem campsite={campsite} onClick={props.onClick}/>
         </div>
       );
     });
@@ -25,7 +33,7 @@ class Directory extends Component {
       </div>
     );
   }
-}
+
 //PASSING PROPS AND STATE EXAMPLE
 //we create a PARENT COMPONENT in which we are storing a local STATE containing the PROPERTY of 'number' with a value of 333. Because we are rendering the CHILD COMPONENT within the PARENT, we can pass variables within the STATE to the CHILD as PROPS. We are also passing the custom ATTRIBUTE of 'greeting' as props in this example(not stored in STATE). PROPS are READ-ONLY DATA passed to a CHILD COMPONENT. This means sometimes we will need to LIFT UP THE STATE so multiple CHILD NODES can access the STATE data
 
