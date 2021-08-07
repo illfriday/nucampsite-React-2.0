@@ -6,7 +6,7 @@ import { ConfigureStore } from "./redux/configureStore";
 import "./App.css";
 
 //We are now importing the {CAMPSITES } data, setting it into the local STATE as 'campsites' and passing it as PROPS to the Directory CHILD COMPONENT
-//moved STATE to 'MainComponent//'
+//move STATE to 'MainComponent//'
 
 const store = ConfigureStore();
 
