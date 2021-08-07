@@ -54,7 +54,7 @@ export default class Header extends Component {
     event.preventDefault();
   }
 
-  Modal;
+  // Modal;
   render() {
     return (
       <React.Fragment>
