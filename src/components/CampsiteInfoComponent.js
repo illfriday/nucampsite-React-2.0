@@ -82,10 +82,10 @@ class CommentForm extends Component {
 
   handleSubmit(event) {
     console.log(
-      `Rating:${event.rating} Author: ${event.author} Comment: ${event.text}`
+      `Author: ${event.author} \nRating:${event.rating} \nComment: ${event.text}`
     );
     alert(
-      `Rating:${event.rating} Author: ${event.author} Comment: ${event.text}`
+      `Author: ${event.author} \nRating:${event.rating} \nComment: ${event.text} }`
     );
     this.toggleModal();
   }
