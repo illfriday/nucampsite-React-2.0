@@ -197,7 +197,6 @@ function CampsiteInfo(props) {
             campsiteId={props.campsite.id}
           />
         </div>
-        <CommentForm />
       </div>
     );
   } else {

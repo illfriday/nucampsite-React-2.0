@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 
 //We are now importing the {CAMPSITES } data, setting it into the local STATE as 'campsites' and passing it as PROPS to the Directory CHILD COMPONENT
 
-//we are NOW TRANSFERRING THE STATE DATE TO THE the REDUX STORE
+//we are NOW TRANSFERRING THE STATE DATA TO THE the REDUX STORE
 
 const mapStateToProps = (state) => {
   return {
