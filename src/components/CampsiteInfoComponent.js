@@ -85,7 +85,7 @@ class CommentForm extends Component {
       `Author: ${event.author} \nRating:${event.rating} \nComment: ${event.text}`
     );
     alert(
-      `Author: ${event.author} \nRating:${event.rating} \nComment: ${event.text} }`
+      `Author: ${event.author} \nRating:${event.rating} \nComment: ${event.text}`
     );
     this.toggleModal();
   }
