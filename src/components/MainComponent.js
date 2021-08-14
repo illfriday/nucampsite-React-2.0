@@ -8,7 +8,7 @@ import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import {
-  addComment,
+  postComment,
   fetchCampsites,
   fetchComments,
   fetchPromotions,
@@ -32,8 +32,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addComment: (campsiteId, rating, author, text) =>
-    addComment(campsiteId, rating, author, text),
+  postComment: (campsiteId, rating, author, text) =>
+    postComment(campsiteId, rating, author, text),
   fetchCampsites: () => fetchCampsites(),
   resetFeedbackForm: () => actions.reset("feedbackForm"),
   fetchComments: () => fetchComments(),
@@ -89,7 +89,7 @@ class Main extends Component {
           comments={this.props.comments.comments.filter(
             (comment) => comment.campsiteId === +match.params.campsiteId
           )}
-          addComment={this.props.addComment}
+          postComment={this.props.postComment}
           commentsErrMess={this.props.comments.errMess}
         />
       );
