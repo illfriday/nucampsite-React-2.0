@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import Label from "reactstrap/lib/Label";
 import { Loading } from "./LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -26,7 +27,7 @@ function RenderCampsite({ campsite }) {
       <Card>
         <CardImg
           top
-          src={campsite.image}
+          src={baseUrl + campsite.image}
           alt={campsite.name}
           key={campsite.id}
         />
@@ -82,7 +83,7 @@ class CommentForm extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(values) {
     // console.log(
     //   `Author: ${event.author} \nRating:${event.rating} \nComment: ${event.text}`
     // );
@@ -92,9 +93,9 @@ class CommentForm extends Component {
     this.toggleModal();
     this.props.addComment(
       this.props.campsiteId,
-      event.rating,
-      event.author,
-      event.text
+      values.rating,
+      values.author,
+      values.text
     );
   }
 
@@ -108,7 +109,7 @@ class CommentForm extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
           <ModalBody>
-            <LocalForm onSubmit={(value) => this.handleSubmit(value)}>
+            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
               <div className="form-group">
                 <Label html="rating">Rating</Label>
                 <Control.select
